@@ -4,6 +4,7 @@
   "author": "Daniel Tieber <daniel.tieber@dynatrace.com>",
   "license": "UNLICENSED",
   "scripts": {
+    "lint": "pnpm run -r --if-present lint",
     "prepare": "husky install"
   },
   "devDependencies": {
