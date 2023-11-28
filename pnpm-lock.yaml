@@ -5,6 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 importers:
+
   .:
     devDependencies:
       '@commitlint/cli':
@@ -16,6 +17,8 @@ importers:
       husky:
         specifier: ^8.0.3
         version: 8.0.3
+
+  packages/editor: {}
 
 packages:
 
