@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "author": "Daniel Tieber <daniel.tieber@dynatrace.com>",
   "license": "UNLICENSED",
-  "scripts": {},
+  "scripts": {
+    "prepare": "husky install"
+  },
   "devDependencies": {
     "husky": "^8.0.3"
   }
