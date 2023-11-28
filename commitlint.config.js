@@ -13,7 +13,7 @@ module.exports = {
   extends: ['@commitlint/config-conventional'],
   rules: {
     'header-max-length': [LEVEL.ERROR, APPLICABLE.ALWAYS, 100],
-    'scope-enum': [LEVEL.ERROR, APPLICABLE.ALWAYS, []],
+    'scope-enum': [LEVEL.ERROR, APPLICABLE.ALWAYS, ['editor']],
     'scope-empty': [LEVEL.OFF]
   }
 }
