@@ -18,6 +18,7 @@ export const startServer = async (): Promise<FastifyInstance> => {
   await fastify.register(health)
 
   await fastify.listen({
+    host: config.HOST,
     port: config.PORT,
   })
 
