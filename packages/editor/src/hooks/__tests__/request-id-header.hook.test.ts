@@ -4,7 +4,7 @@ import Fastify from 'fastify'
 
 import { requestIdHeader } from '../request-id-header.hook'
 
-describe('get-origins-route', () => {
+describe('request-id-header hook', () => {
 
   let application: FastifyInstance
 
