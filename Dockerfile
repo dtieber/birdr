@@ -13,24 +13,18 @@ WORKDIR /usr/src/app
 COPY package.json ./
 COPY pnpm-lock.yaml ./
 COPY pnpm-workspace.yaml ./
-COPY packages/${PACKAGE_NAME} ./packages/${PACKAGE_NAME}
+COPY packages ./packages
 
-RUN echo "node-linker=hoisted" >> .npmrc
-
-RUN pnpm --filter ${PACKAGE_NAME}... install && \
-    pnpm --filter ${PACKAGE_NAME} build
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN pnpm run -r build
+RUN pnpm deploy --filter=${PACKAGE_NAME} --prod /usr/prod/${PACKAGE_NAME}
 
 
 FROM base
 ARG PACKAGE_NAME
-WORKDIR /usr/src/app
 
-COPY --from=build --chown=node:node /usr/src/app/package.json ./package.json
-COPY --from=build --chown=node:node /usr/src/app/node_modules ./node_modules
-COPY --from=build --chown=node:node /usr/src/app/packages/${PACKAGE_NAME}/.env ./packages/${PACKAGE_NAME}/.env
-COPY --from=build --chown=node:node /usr/src/app/packages/${PACKAGE_NAME}/package.json ./packages/${PACKAGE_NAME}/package.json
-COPY --from=build --chown=node:node /usr/src/app/packages/${PACKAGE_NAME}/dist ./packages/${PACKAGE_NAME}/dist
+COPY --from=build /usr/prod/${PACKAGE_NAME} /usr/prod/${PACKAGE_NAME}
+WORKDIR /usr/prod/${PACKAGE_NAME}
 
-WORKDIR /usr/src/app/packages/${PACKAGE_NAME}
 EXPOSE 3000
 CMD node dist/index.js
