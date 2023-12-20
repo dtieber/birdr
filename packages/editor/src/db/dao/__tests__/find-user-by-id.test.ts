@@ -1,8 +1,10 @@
 import { afterAll, describe, expect, it } from '@jest/globals'
 import { pino } from 'pino'
 
+import { isError } from '../../../errors/is-error.util'
 import { loggerConfig } from '../../../logger/logging.configuration'
 import { dbInstance } from '../../client'
+import { addUser } from '../add-user'
 import { findUserById } from '../find-user-by-id'
 
 describe('find-user-by-id dao', () => {
@@ -12,10 +14,19 @@ describe('find-user-by-id dao', () => {
     await dbInstance.destroy()
   })
 
-  it('returns error if user is not found', async () => {
-    const foundUser = await findUserById(logger, 666)
+  it('returns user', async () => {
+    const username = `my-username-${Date.now()}`
+    const user = await addUser(logger, username)
+    if(isError(user)) {
+      throw new Error('Failed to insert user')
+    }
 
-    expect(foundUser).toMatchObject({ message:'User with id 666 not found' })
+    const foundUser = await findUserById(logger, user.id)
+
+    expect(foundUser).toMatchObject({
+      id: user.id,
+      username,
+    })
   })
 
 })
