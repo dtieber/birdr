@@ -6,9 +6,6 @@ module.exports = {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
   testEnvironment: 'node',
-  testMatch: [
-    '<rootDir>/**/__tests__/*.test.(ts|tsx)'
-  ],
   moduleFileExtensions: [
     'ts',
     'tsx',
