@@ -1,5 +1,5 @@
 {
-  "name": "editor",
+  "name": "postings",
   "private": true,
   "scripts": {
     "build": "tsc",
