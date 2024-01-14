@@ -9,6 +9,7 @@
     "test:ut": "jest --testRegex '.*\\.test\\.ts$'"
   },
   "dependencies": {
+    "@birdr/shared": "workspace:*",
     "fastify": "^4.24.3"
   },
   "devDependencies": {
