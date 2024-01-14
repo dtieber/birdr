@@ -4,6 +4,8 @@ export const dbConfig: { [key: string]: Knex.Config } = {
   development: {
     client: 'postgresql',
     connection: {
+      host: 'localhost',
+      port: 5002,
       database: 'users',
       user: 'myuser',
       password: 'mypassword',
