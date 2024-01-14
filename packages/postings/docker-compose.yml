@@ -6,6 +6,6 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_PASSWORD=mapassword
-      - POSTGRES_USER=mauser
-      - POSTGRES_DB=madatabase
+      - POSTGRES_DB=postings
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_USER=myuser
