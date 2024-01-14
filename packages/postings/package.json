@@ -8,7 +8,7 @@
     "knex": "knex",
     "serve": "node dist/index.js",
     "test:it": "jest --testRegex '.*\\.itest\\.ts$' --run-in-band",
-    "test:ut": "jest --testRegex '.*\\.test\\.ts$'",
+    "test:ut": "jest --testRegex '.*\\.test\\.ts$' --passWithNoTests",
     "test": "pnpm test:ut && pnpm test:it",
     "watch": "nodemon --inspect src/index.ts"
   },
