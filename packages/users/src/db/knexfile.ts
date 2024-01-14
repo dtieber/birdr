@@ -4,9 +4,9 @@ export const dbConfig: { [key: string]: Knex.Config } = {
   development: {
     client: 'postgresql',
     connection: {
-      database: 'madatabase',
-      user: 'mauser',
-      password: 'mapassword',
+      database: 'users',
+      user: 'myuser',
+      password: 'mypassword',
     },
   },
 }
