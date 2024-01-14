@@ -1,3 +1,4 @@
+import { requestIdHeader } from '@birdr/shared'
 import type { FastifyBaseLogger, FastifyInstance } from 'fastify'
 import Fastify from 'fastify'
 import { pino } from 'pino'
@@ -11,6 +12,8 @@ export const startServer = async (): Promise<FastifyInstance> => {
   const fastify = Fastify({
     logger,
   })
+
+  await fastify.register(requestIdHeader)
 
   await fastify.register(health)
 
