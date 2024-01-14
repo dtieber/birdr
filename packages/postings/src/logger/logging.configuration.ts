@@ -1,7 +1,7 @@
+import { logLevelFormatter, timestampFormatter } from '@birdr/shared'
 import type { PinoLoggerOptions } from 'fastify/types/logger'
 
 import { config } from '../config'
-import { logLevelFormatter, timestampFormatter } from './logging.formatter'
 
 const loggerFormatters = {
   level: logLevelFormatter,
