@@ -12,6 +12,7 @@ export const startServer = async (): Promise<FastifyInstance> => {
   })
 
   await fastify.listen({
+    host: config.HOST,
     port: config.PORT,
   })
 
