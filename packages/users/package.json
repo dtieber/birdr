@@ -8,7 +8,8 @@
     "serve": "node dist/index.js",
     "test": "pnpm test:ut && pnpm test:it",
     "test:it": "jest --testRegex '.*\\.itest\\.ts$' --run-in-band",
-    "test:ut": "jest --testRegex '.*\\.test\\.ts$'"
+    "test:ut": "jest --testRegex '.*\\.test\\.ts$'",
+    "watch": "nodemon --inspect src/index.ts"
   },
   "dependencies": {
     "@birdr/shared": "workspace:*",
