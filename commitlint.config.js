@@ -15,6 +15,7 @@ module.exports = {
     'header-max-length': [LEVEL.ERROR, APPLICABLE.ALWAYS, 100],
     'scope-enum': [LEVEL.ERROR, APPLICABLE.ALWAYS, [
       'postings',
+      'shared',
       'users',
     ]],
     'scope-empty': [LEVEL.OFF]
