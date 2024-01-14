@@ -5,7 +5,6 @@ import { pino } from 'pino'
 import { loggerConfig } from '../../../logger/logging.configuration'
 import { dbInstance } from '../../client'
 import { addPosting } from '../add-posting'
-import { addUser } from '../add-user'
 import { approvePosting } from '../approve-posting'
 import { fetchPostings } from '../fetch-postings'
 
@@ -17,16 +16,13 @@ describe('postings dao', () => {
   })
 
   it('returns a list of postings', async () => {
-    const user = await addUser(logger, `my-username-${Date.now()}`)
-    if(isError(user)) {
-      throw new Error('Failed to insert user')
-    }
-    const firstPosting = await addPosting(logger, user.id, 'my first posting')
+    const userId = 1
+    const firstPosting = await addPosting(logger, userId, 'my first posting')
     if(isError(firstPosting)) {
       throw new Error('Failed to insert first posting')
     }
     await approvePosting(logger, firstPosting.id)
-    const secondPosting = await addPosting(logger, user.id, 'my second posting')
+    const secondPosting = await addPosting(logger, userId, 'my second posting')
     if(isError(secondPosting)) {
       throw new Error('Failed to insert second posting')
     }

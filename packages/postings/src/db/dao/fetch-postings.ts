@@ -2,7 +2,6 @@ import pino from 'pino'
 
 import { dbInstance } from '../client'
 import type { Posting } from '../types/posting'
-import type { User } from '../types/user'
 
 import BaseLogger = pino.BaseLogger
 
@@ -19,14 +18,12 @@ export async function fetchPostings(logger: BaseLogger, limit: number, offset: n
         'posting.text',
         'posting.approved',
         'posting.updated',
-        'user.id as userid',
-        'user.username',
+        'posting.author',
       ])
       .from<Posting>('posting')
       .where({
         approved: true,
       })
-      .leftJoin<User>('user', 'user.id', 'posting.author')
       .limit(limit)
       .offset(offset)
       .orderBy('updated', 'desc')
