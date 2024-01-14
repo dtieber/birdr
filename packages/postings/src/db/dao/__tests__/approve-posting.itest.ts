@@ -5,7 +5,6 @@ import { pino } from 'pino'
 import { loggerConfig } from '../../../logger/logging.configuration'
 import { dbInstance } from '../../client'
 import { addPosting } from '../add-posting'
-import { addUser } from '../add-user'
 import { approvePosting } from '../approve-posting'
 
 describe('approve-posting dao', () => {
@@ -16,11 +15,8 @@ describe('approve-posting dao', () => {
   })
 
   it('sets posting to approved', async () => {
-    const user = await addUser(logger, `my-username-${Date.now()}`)
-    if(isError(user)) {
-      throw new Error('Failed to insert user')
-    }
-    const posting = await addPosting(logger, user.id, 'hello world')
+    const userId = 1
+    const posting = await addPosting(logger, userId, 'hello world')
     if(isError(posting)) {
       throw new Error('Failed to insert posting')
     }
