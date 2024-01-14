@@ -1,7 +1,7 @@
+import { isError } from '@birdr/shared'
 import { afterAll, describe, expect, it } from '@jest/globals'
 import { pino } from 'pino'
 
-import { isError } from '../../../errors/is-error.util'
 import { loggerConfig } from '../../../logger/logging.configuration'
 import { dbInstance } from '../../client'
 import { addUser } from '../add-user'
