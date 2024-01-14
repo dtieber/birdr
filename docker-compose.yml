@@ -1,11 +1,20 @@
 version: '3.8'
 
 services:
-  postgres:
+  postingsdb:
     image: postgres:16-alpine
     ports:
       - 5001:5432
     environment:
       - POSTGRES_DB=postings
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_USER=myuser
+
+  usersdb:
+    image: postgres:16-alpine
+    ports:
+      - 5002:5432
+    environment:
+      - POSTGRES_DB=users
       - POSTGRES_PASSWORD=mypassword
       - POSTGRES_USER=myuser
