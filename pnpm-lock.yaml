@@ -138,6 +138,9 @@ importers:
       '@birdr/shared':
         specifier: workspace:*
         version: link:../shared
+      dotenv:
+        specifier: ^16.3.1
+        version: 16.3.1
       fastify:
         specifier: ^4.24.3
         version: 4.24.3
