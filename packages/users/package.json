@@ -3,7 +3,10 @@
   "private": true,
   "scripts": {
     "build": "tsc",
-    "lint": "eslint . --fix --ext .js,.ts,.tsx --cache --max-warnings 0"
+    "lint": "eslint . --fix --ext .js,.ts,.tsx --cache --max-warnings 0",
+    "test": "pnpm test:ut && pnpm test:it",
+    "test:it": "jest --testRegex '.*\\.itest\\.ts$' --run-in-band",
+    "test:ut": "jest --testRegex '.*\\.test\\.ts$'"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
