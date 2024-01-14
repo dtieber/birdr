@@ -135,6 +135,9 @@ importers:
 
   packages/users:
     dependencies:
+      '@birdr/shared':
+        specifier: workspace:*
+        version: link:../shared
       fastify:
         specifier: ^4.24.3
         version: 4.24.3
