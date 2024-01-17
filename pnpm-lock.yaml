@@ -184,6 +184,9 @@ importers:
 
   packages/users:
     dependencies:
+      '@birdr/events':
+        specifier: workspace:*
+        version: link:../events
       '@birdr/shared':
         specifier: workspace:*
         version: link:../shared
