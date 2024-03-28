@@ -1,4 +1,4 @@
-import { requestIdHeader } from '@birdr/shared'
+import { authHandler, requestIdHeader } from '@birdr/shared'
 import type { FastifyInstance } from 'fastify'
 import Fastify from 'fastify'
 
