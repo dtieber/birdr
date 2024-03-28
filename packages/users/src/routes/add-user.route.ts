@@ -1,6 +1,6 @@
 import { UserActions } from '@birdr/events'
 import { isError, isFailure } from '@birdr/shared'
-import type { FastifyPluginAsync } from 'fastify'
+import type { FastifyInstance, FastifyPluginAsync } from 'fastify'
 import * as fp from 'fastify-plugin'
 import type { FromSchema } from 'json-schema-to-ts'
 
@@ -10,10 +10,11 @@ import { sendUsersEvent } from '../events/send-users-event'
 import type { AddUserRequestBody } from './add-user.schema'
 import { requestSchema, responseSchema } from './add-user.schema'
 
-const routePlugin: FastifyPluginAsync = async (fastify, _) => {
+const routePlugin: FastifyPluginAsync = async (fastify: FastifyInstance, _) => {
   fastify.post<{ Body: FromSchema<typeof AddUserRequestBody> }>(
     '/users',
     {
+      preHandler: fastify.auth,
       schema: {
         ...requestSchema,
         ...responseSchema,
