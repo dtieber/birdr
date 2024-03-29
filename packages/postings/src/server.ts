@@ -4,6 +4,7 @@ import Fastify from 'fastify'
 import { pino } from 'pino'
 
 import { config } from './config'
+import { database } from './decorators/db-instance.decorator'
 import { userEventConsumer } from './decorators/user-event-consumer.decorator'
 import { loggerConfig } from './logger/logging.configuration'
 import { health } from './routes/health.route'
@@ -18,6 +19,7 @@ export const startServer = async (): Promise<FastifyInstance> => {
   await fastify.register(requestIdHeader)
 
   // decorators
+  await fastify.register(database)
   await fastify.register(userEventConsumer)
 
   // routes
