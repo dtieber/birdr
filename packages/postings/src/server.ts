@@ -13,8 +13,10 @@ export const startServer = async (): Promise<FastifyInstance> => {
     logger,
   })
 
+  // hooks
   await fastify.register(requestIdHeader)
 
+  // routes
   await fastify.register(health)
 
   await fastify.listen({
