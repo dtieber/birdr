@@ -19,4 +19,13 @@ export const loggerConfig: PinoLoggerOptions = {
     remove: true,
   },
   timestamp: timestampFormatter,
+  ...config.NODE_ENV === 'development' && {
+    transport: {
+      target: 'pino-pretty',
+      options: {
+        messageKey: 'message',
+        colorize: true,
+      },
+    },
+  },
 }
