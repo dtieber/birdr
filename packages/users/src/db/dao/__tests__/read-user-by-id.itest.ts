@@ -16,12 +16,12 @@ describe('read-user-by-id dao', () => {
 
   it('returns user', async () => {
     const username = `my-username-${Date.now()}`
-    const user = await createUser(logger, username)
+    const user = await createUser(logger, dbInstance, username)
     if(isError(user)) {
       throw new Error('Failed to insert user')
     }
 
-    const foundUser = await readUserById(logger, user.id)
+    const foundUser = await readUserById(logger, dbInstance, user.id)
 
     expect(foundUser).toMatchObject({
       id: user.id,

@@ -1,14 +1,13 @@
 import pino from 'pino'
 
-import { dbInstance } from '../client'
-
 import BaseLogger = pino.BaseLogger
 import { Failure } from '@birdr/shared'
+import type { Knex } from 'knex'
 
 import { ErrorCodes } from '../../errors/error-codes'
 import type { User } from '../types/user'
 
-export async function readUserById(logger: BaseLogger, id: string): Promise<User | Failure> {
+export async function readUserById(logger: BaseLogger, dbInstance: Knex, id: string): Promise<User | Failure> {
   try {
     const maybeUser = await dbInstance.select<User>('*')
       .from('user')

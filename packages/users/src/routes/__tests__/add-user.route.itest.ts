@@ -2,6 +2,7 @@ import { afterAll, beforeAll, describe, expect, it } from '@jest/globals'
 import type { FastifyInstance } from 'fastify'
 import Fastify from 'fastify'
 
+import { database } from '../../decorators/db-instance.decorator'
 import { userEventProducer } from '../../decorators/user-event-producer.decorator'
 import { addUser } from '../add-user.route'
 
@@ -11,12 +12,15 @@ describe('add-user route', () => {
 
   beforeAll(async() => {
     application = Fastify()
+    await application.register(database)
     await application.register(userEventProducer)
     await application.register(addUser)
   })
 
   afterAll(async() => {
     await application.close()
+    await application.userEventProducer.disconnect()
+    await application.database.destroy()
   })
 
   it('returns 200 with userid', async () => {

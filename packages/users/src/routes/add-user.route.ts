@@ -26,7 +26,7 @@ const routePlugin: FastifyPluginAsync = async (fastify: FastifyInstance, _) => {
         request: request.body,
       })
 
-      const dbResult = await createUser(request.log, request.body.username)
+      const dbResult = await createUser(request.log, fastify.database, request.body.username)
 
       if(isFailure(dbResult)) {
         if(dbResult.code === ErrorCodes.USER_ALREADY_EXISTS) {

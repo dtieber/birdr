@@ -14,7 +14,7 @@ describe('create-user dao', () => {
 
   it('returns id after inserting new user', async () => {
     const username = `my-username-${Date.now()}`
-    const user = await createUser(logger, username)
+    const user = await createUser(logger, dbInstance, username)
 
     expect(user).toMatchObject({
       username,

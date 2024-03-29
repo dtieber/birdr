@@ -2,9 +2,9 @@ import pino from 'pino'
 import BaseLogger = pino.BaseLogger
 
 import { Failure } from '@birdr/shared'
+import type { Knex } from 'knex'
 
 import { ErrorCodes } from '../../errors/error-codes'
-import { dbInstance } from '../client'
 import type { User } from '../types/user'
 import { readUserById } from './read-user-by-id'
 
@@ -12,10 +12,10 @@ interface PgError extends Error {
   routine: string | undefined
 }
 
-export async function createUser(logger: BaseLogger, username: string): Promise<User | Failure> {
+export async function createUser(logger: BaseLogger, dbInstance: Knex, username: string): Promise<User | Failure> {
   try {
     const result = await dbInstance.insert<User>({ username }).returning('id').into('user')
-    return readUserById(logger, result[0].id)
+    return readUserById(logger, dbInstance, result[0].id)
   } catch (err) {
     const e = err as PgError
     logger.warn({
