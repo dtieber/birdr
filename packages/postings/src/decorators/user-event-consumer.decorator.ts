@@ -1,8 +1,8 @@
+import { getConsumer } from '@birdr/events'
 import type { FastifyPluginAsync } from 'fastify'
 import * as fp from 'fastify-plugin'
 
 import { config } from '../config'
-import { getConsumer } from '../events/consumer'
 import { receiveUsersEvents } from '../events/receive-users-events'
 
 const userEventConsumerPlugin: FastifyPluginAsync = async (fastify, _) => {
