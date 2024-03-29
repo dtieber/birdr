@@ -3,9 +3,9 @@ import { pino } from 'pino'
 
 import { loggerConfig } from '../../../logger/logging.configuration'
 import { dbInstance } from '../../client'
-import { addPosting } from '../add-posting'
+import { createPosting } from '../create-posting'
 
-describe('add-posting dao', () => {
+describe('create-posting dao', () => {
   const logger = pino(loggerConfig)
 
   afterAll(async () => {
@@ -16,7 +16,7 @@ describe('add-posting dao', () => {
     const postingText = 'hello world'
     const userId = 1
 
-    const posting = await addPosting(logger, userId, postingText)
+    const posting = await createPosting(logger, userId, postingText)
 
     expect(posting).toMatchObject({
       author: userId,

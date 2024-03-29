@@ -4,11 +4,11 @@ import { pino } from 'pino'
 
 import { loggerConfig } from '../../../logger/logging.configuration'
 import { dbInstance } from '../../client'
-import { addPosting } from '../add-posting'
 import { approvePosting } from '../approve-posting'
-import { fetchPostings } from '../fetch-postings'
+import { createPosting } from '../create-posting'
+import { readPostings } from '../read-postings'
 
-describe('postings dao', () => {
+describe('read-postings dao', () => {
   const logger = pino(loggerConfig)
 
   afterAll(async () => {
@@ -17,18 +17,18 @@ describe('postings dao', () => {
 
   it('returns a list of postings', async () => {
     const userId = 1
-    const firstPosting = await addPosting(logger, userId, 'my first posting')
+    const firstPosting = await createPosting(logger, userId, 'my first posting')
     if(isError(firstPosting)) {
       throw new Error('Failed to insert first posting')
     }
     await approvePosting(logger, firstPosting.id)
-    const secondPosting = await addPosting(logger, userId, 'my second posting')
+    const secondPosting = await createPosting(logger, userId, 'my second posting')
     if(isError(secondPosting)) {
       throw new Error('Failed to insert second posting')
     }
     await approvePosting(logger, secondPosting.id)
 
-    const postings = await fetchPostings(logger, 2, 0)
+    const postings = await readPostings(logger, 2, 0)
 
     expect(postings).toEqual(
       expect.arrayContaining([

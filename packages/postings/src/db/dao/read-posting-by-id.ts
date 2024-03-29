@@ -5,7 +5,7 @@ import { dbInstance } from '../client'
 import BaseLogger = pino.BaseLogger
 import type { Posting } from '../types/posting'
 
-export async function findPostingById(logger: BaseLogger, id: number): Promise<Posting | Error> {
+export async function readPostingById(logger: BaseLogger, id: number): Promise<Posting | Error> {
   try {
     const maybePosting = await dbInstance
       .select([

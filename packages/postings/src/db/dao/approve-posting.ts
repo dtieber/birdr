@@ -4,7 +4,7 @@ import { dbInstance } from '../client'
 
 import BaseLogger = pino.BaseLogger
 import type { Posting } from '../types/posting'
-import { findPostingById } from './find-posting-by-id'
+import { readPostingById } from './read-posting-by-id'
 
 export async function approvePosting(logger: BaseLogger, id: number): Promise<Posting | Error> {
   try {
@@ -15,7 +15,7 @@ export async function approvePosting(logger: BaseLogger, id: number): Promise<Po
       .update<Posting>({
         approved: true,
       })
-    return await findPostingById(logger, id)
+    return await readPostingById(logger, id)
   } catch (err) {
     logger.warn({
       message: 'DB error while finding user',

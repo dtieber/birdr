@@ -5,7 +5,7 @@ import type { Posting } from '../types/posting'
 
 import BaseLogger = pino.BaseLogger
 
-export async function fetchPostings(logger: BaseLogger, limit: number, offset: number = 0): Promise<Posting[] | Error> {
+export async function readPostings(logger: BaseLogger, limit: number, offset: number = 0): Promise<Posting[] | Error> {
   const maxNumberOfPostings = 20
   if(limit > maxNumberOfPostings) {
     return new Error(`Limit has to be below ${maxNumberOfPostings}`)
