@@ -3,6 +3,7 @@ import type { FastifyInstance } from 'fastify'
 import Fastify from 'fastify'
 
 import { config } from './config'
+import { database } from './decorators/db-instance.decorator'
 import { userEventProducer } from './decorators/user-event-producer.decorator'
 import { logger } from './logger/logger'
 import { addUser } from './routes/add-user.route'
@@ -18,6 +19,7 @@ export const startServer = async (): Promise<FastifyInstance> => {
 
   // decorators
   await fastify.register(authHandler)
+  await fastify.register(database)
   await fastify.register(userEventProducer)
 
   // routes
