@@ -1,6 +1,6 @@
 export interface Posting {
-  id: number
+  id: string
   text: string
   approved: boolean
-  author: number
+  author: string
 }

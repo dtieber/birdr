@@ -14,7 +14,7 @@ describe('create-posting dao', () => {
 
   it('returns id after inserting new posting', async () => {
     const postingText = 'hello world'
-    const userId = 1
+    const userId = '1'
 
     const posting = await createPosting(logger, userId, postingText)
 

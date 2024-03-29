@@ -6,7 +6,7 @@ import BaseLogger = pino.BaseLogger
 import type { Posting } from '../types/posting'
 import { readPostingById } from './read-posting-by-id'
 
-export async function createPosting(logger: BaseLogger, userId: number, text: string): Promise<Posting | Error> {
+export async function createPosting(logger: BaseLogger, userId: string, text: string): Promise<Posting | Error> {
   try {
     const result = await dbInstance.insert<Posting>({
       author: userId,

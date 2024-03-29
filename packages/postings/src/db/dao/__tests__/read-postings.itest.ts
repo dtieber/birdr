@@ -16,7 +16,7 @@ describe('read-postings dao', () => {
   })
 
   it('returns a list of postings', async () => {
-    const userId = 1
+    const userId = '1'
     const firstPosting = await createPosting(logger, userId, 'my first posting')
     if(isError(firstPosting)) {
       throw new Error('Failed to insert first posting')

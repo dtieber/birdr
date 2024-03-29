@@ -33,7 +33,12 @@ export async function readPostings(logger: BaseLogger, limit: number, offset: nu
       postings,
     })
 
-    return postings
+    return postings.map(posting => ({
+      id: posting.id.toString(),
+      text: posting.text,
+      approved: posting.approved,
+      author: posting.author.toString(),
+    }))
   } catch (err) {
     logger.warn({
       message: 'DB error while fetching postings',

@@ -15,7 +15,7 @@ describe('read-posting-by-id dao', () => {
   })
 
   it('returns posting', async () => {
-    const userId = 1
+    const userId = '1'
     const postingText = 'hello world'
     const posting = await createPosting(logger, userId, postingText)
     if(isError(posting)) {

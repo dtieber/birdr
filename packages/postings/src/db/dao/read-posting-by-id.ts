@@ -5,7 +5,7 @@ import { dbInstance } from '../client'
 import BaseLogger = pino.BaseLogger
 import type { Posting } from '../types/posting'
 
-export async function readPostingById(logger: BaseLogger, id: number): Promise<Posting | Error> {
+export async function readPostingById(logger: BaseLogger, id: string): Promise<Posting | Error> {
   try {
     const maybePosting = await dbInstance
       .select([
@@ -23,7 +23,12 @@ export async function readPostingById(logger: BaseLogger, id: number): Promise<P
     if(!maybePosting) {
       return new Error(`Posting with id ${id} not found`)
     }
-    return maybePosting
+    return {
+      id: maybePosting.id.toString(),
+      text: maybePosting.text,
+      approved: maybePosting.approved,
+      author: maybePosting.author.toString(),
+    }
   } catch (err) {
     logger.warn({
       message: `DB error while finding posting by id ${id}`,

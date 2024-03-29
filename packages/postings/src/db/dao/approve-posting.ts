@@ -6,7 +6,7 @@ import BaseLogger = pino.BaseLogger
 import type { Posting } from '../types/posting'
 import { readPostingById } from './read-posting-by-id'
 
-export async function approvePosting(logger: BaseLogger, id: number): Promise<Posting | Error> {
+export async function approvePosting(logger: BaseLogger, id: string): Promise<Posting | Error> {
   try {
     await dbInstance('posting')
       .where({
