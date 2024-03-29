@@ -17,12 +17,12 @@ describe('read-posting-by-id dao', () => {
   it('returns posting', async () => {
     const userId = '1'
     const postingText = 'hello world'
-    const posting = await createPosting(logger, userId, postingText)
+    const posting = await createPosting(logger, dbInstance, userId, postingText)
     if(isError(posting)) {
       throw new Error('Failed to insert posting')
     }
 
-    const foundPosting = await readPostingById(logger, posting.id)
+    const foundPosting = await readPostingById(logger, dbInstance, posting.id)
 
     expect(foundPosting).toMatchObject({
       text: postingText,

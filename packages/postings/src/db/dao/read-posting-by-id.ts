@@ -1,11 +1,11 @@
 import pino from 'pino'
 
-import { dbInstance } from '../client'
-
 import BaseLogger = pino.BaseLogger
+import type { Knex } from 'knex'
+
 import type { Posting } from '../types/posting'
 
-export async function readPostingById(logger: BaseLogger, id: string): Promise<Posting | Error> {
+export async function readPostingById(logger: BaseLogger, dbInstance: Knex, id: string): Promise<Posting | Error> {
   try {
     const maybePosting = await dbInstance
       .select([

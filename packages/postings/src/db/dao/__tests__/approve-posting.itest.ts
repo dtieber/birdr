@@ -16,12 +16,12 @@ describe('approve-posting dao', () => {
 
   it('sets posting to approved', async () => {
     const userId = '1'
-    const posting = await createPosting(logger, userId, 'hello world')
+    const posting = await createPosting(logger, dbInstance, userId, 'hello world')
     if(isError(posting)) {
       throw new Error('Failed to insert posting')
     }
 
-    const approvedPosting = await approvePosting(logger, posting.id)
+    const approvedPosting = await approvePosting(logger, dbInstance, posting.id)
 
     expect(approvedPosting).toMatchObject({
       approved: true,

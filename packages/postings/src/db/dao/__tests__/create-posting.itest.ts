@@ -16,7 +16,7 @@ describe('create-posting dao', () => {
     const postingText = 'hello world'
     const userId = '1'
 
-    const posting = await createPosting(logger, userId, postingText)
+    const posting = await createPosting(logger, dbInstance, userId, postingText)
 
     expect(posting).toMatchObject({
       author: userId,

@@ -17,18 +17,18 @@ describe('read-postings dao', () => {
 
   it('returns a list of postings', async () => {
     const userId = '1'
-    const firstPosting = await createPosting(logger, userId, 'my first posting')
+    const firstPosting = await createPosting(logger, dbInstance, userId, 'my first posting')
     if(isError(firstPosting)) {
       throw new Error('Failed to insert first posting')
     }
-    await approvePosting(logger, firstPosting.id)
-    const secondPosting = await createPosting(logger, userId, 'my second posting')
+    await approvePosting(logger, dbInstance, firstPosting.id)
+    const secondPosting = await createPosting(logger, dbInstance, userId, 'my second posting')
     if(isError(secondPosting)) {
       throw new Error('Failed to insert second posting')
     }
-    await approvePosting(logger, secondPosting.id)
+    await approvePosting(logger, dbInstance, secondPosting.id)
 
-    const postings = await readPostings(logger, 2, 0)
+    const postings = await readPostings(logger, dbInstance, 2, 0)
 
     expect(postings).toEqual(
       expect.arrayContaining([

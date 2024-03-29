@@ -1,11 +1,11 @@
 import pino from 'pino'
 
-import { dbInstance } from '../client'
 import type { Posting } from '../types/posting'
 
 import BaseLogger = pino.BaseLogger
+import type { Knex } from 'knex'
 
-export async function readPostings(logger: BaseLogger, limit: number, offset: number = 0): Promise<Posting[] | Error> {
+export async function readPostings(logger: BaseLogger, dbInstance: Knex, limit: number, offset: number = 0): Promise<Posting[] | Error> {
   const maxNumberOfPostings = 20
   if(limit > maxNumberOfPostings) {
     return new Error(`Limit has to be below ${maxNumberOfPostings}`)
