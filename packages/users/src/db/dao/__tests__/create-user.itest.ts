@@ -3,9 +3,9 @@ import { pino } from 'pino'
 
 import { loggerConfig } from '../../../logger/logging.configuration'
 import { dbInstance } from '../../client'
-import { addUser } from '../add-user'
+import { createUser } from '../create-user'
 
-describe('add-user dao', () => {
+describe('create-user dao', () => {
   const logger = pino(loggerConfig)
 
   afterAll(async () => {
@@ -14,7 +14,7 @@ describe('add-user dao', () => {
 
   it('returns id after inserting new user', async () => {
     const username = `my-username-${Date.now()}`
-    const user = await addUser(logger, username)
+    const user = await createUser(logger, username)
 
     expect(user).toMatchObject({
       username,

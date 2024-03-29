@@ -5,7 +5,7 @@ import { dbInstance } from '../client'
 import BaseLogger = pino.BaseLogger
 import type { User } from '../types/user'
 
-export async function findUserById(logger: BaseLogger, id: string): Promise<User | Error> {
+export async function readUserById(logger: BaseLogger, id: string): Promise<User | Error> {
   try {
     const maybeUser = await dbInstance.select<User>('*')
       .from('user')
@@ -22,7 +22,7 @@ export async function findUserById(logger: BaseLogger, id: string): Promise<User
     }
   } catch (err) {
     logger.warn({
-      message: `DB error while finding user by id ${id}`,
+      message: `DB error while reading user by id ${id}`,
       err,
     })
     return err as Error

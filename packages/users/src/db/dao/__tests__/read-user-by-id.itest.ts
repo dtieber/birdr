@@ -4,10 +4,10 @@ import { pino } from 'pino'
 
 import { loggerConfig } from '../../../logger/logging.configuration'
 import { dbInstance } from '../../client'
-import { addUser } from '../add-user'
-import { findUserById } from '../find-user-by-id'
+import { createUser } from '../create-user'
+import { readUserById } from '../read-user-by-id'
 
-describe('find-user-by-id dao', () => {
+describe('read-user-by-id dao', () => {
   const logger = pino(loggerConfig)
 
   afterAll(async () => {
@@ -16,12 +16,12 @@ describe('find-user-by-id dao', () => {
 
   it('returns user', async () => {
     const username = `my-username-${Date.now()}`
-    const user = await addUser(logger, username)
+    const user = await createUser(logger, username)
     if(isError(user)) {
       throw new Error('Failed to insert user')
     }
 
-    const foundUser = await findUserById(logger, user.id)
+    const foundUser = await readUserById(logger, user.id)
 
     expect(foundUser).toMatchObject({
       id: user.id,
