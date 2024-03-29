@@ -7,6 +7,7 @@ import { database } from './decorators/db-instance.decorator'
 import { userEventProducer } from './decorators/user-event-producer.decorator'
 import { logger } from './logger/logger'
 import { addUser } from './routes/add-user.route'
+import { findUser } from './routes/find-user.route'
 import { health } from './routes/health.route'
 
 export const startServer = async (): Promise<FastifyInstance> => {
@@ -25,6 +26,7 @@ export const startServer = async (): Promise<FastifyInstance> => {
   // routes
   await fastify.register(health)
   await fastify.register(addUser)
+  await fastify.register(findUser)
 
   await fastify.listen({
     host: config.HOST,
